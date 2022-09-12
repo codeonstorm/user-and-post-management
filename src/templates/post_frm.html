@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block title %} User Manager {% endblock %}
+
+
+{% block navbar %}
+  {{ include('/partials/navbar.html') }}
+{% endblock %}
+
+{% block aside %}
+  {{ include('/partials/aside.html') }}
+{% endblock %}
+
+{% block content_header %}
+  {{ include('/partials/content_header.html') }}
+{% endblock %}
+
+{% block container %}
+{{ include('/partials/flash.html') }}
+<div class="row">
+ <div class="col-md-12">
+   <div class="card card-success">
+     <div class="card-header">
+       <h3 class="card-title">User Manager</h3>
+       <div class="card-tools">
+         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+         </button>
+
+         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+         </button>
+       </div>
+       <!-- /.card-tools -->
+     </div>
+     <!-- /.card-header -->
+
+     <div class="card-body">
+       <form role="form" action="{% if post %}{{url_for('update_post')}} {% else %} {{url_for('add_post_processs')}} {% endif %}" method="post" enctype="multipart/form-data">
+
+         <div class="row">
+           <div class="form-group col-md-6">
+            <label for="title">Post Title</label>
+             <input type="text" class="form-control " id="title" name="title" value="{{ post.title }}" placeholder="Enter Post Title">
+           </div>
+
+           <div class="form-group col-md-6">
+            <label for="slug">slug</label>
+             <input type="text" class="form-control " id="slug" name="slug" value="{{ post.slug }}" placeholder="">
+           </div>
+         </div>
+
+
+          <div class="form-group">
+           <textarea name="desc" rows="8" cols="120" placeholder="Enter Here Your Post..">{{ post.description }}</textarea>
+          </div>
+
+
+        {% if post %}
+        <input type="hidden" name="id" value="{{ post.id }}">
+          <button type="submit" class="form-control" style="background-color:#007bff;
+             color:#fff;"  name="update"  value="submit">Update</button>
+             {% else %}
+             <button type="submit" class="form-control" style="background-color:#007bff;
+                color:#fff;"  name="add"  value="submit">Add</button>
+        {% endif %}
+  <!-- /.card-body -->
+ </form>
+  </div>
+     <!-- /.card-body -->
+   </div>
+   <!-- /.card -->
+ </div>
+<!------------------------>
+ <!-- /.col -->
+</div>
+{% endblock %}

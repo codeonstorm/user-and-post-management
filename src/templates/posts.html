@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %} Posts {% endblock %}
+
+
+{% block navbar %}
+  {{ include('/partials/navbar.html') }}
+{% endblock %}
+
+{% block aside %}
+  {{ include('/partials/aside.html') }}
+{% endblock %}
+
+{% block content_header %}
+  {{ include('/partials/content_header.html') }}
+{% endblock %}
+
+{% block container %}
+{{ include('/partials/flash.html') }}
+
+{% for post in posts %}
+
+<div class="card">
+  <div class="col-md-12">
+    <div class="post">
+      <div class="p-4">
+
+
+                     <div class="user-block">
+                       <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                       <span class="username">
+                         <a href="posts/{{ post.slug }}">{{ post.name }}.</a>
+                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                       </span>
+                       <span class="description">Title - {{ post.title }}</span>
+                       <span class="description">Shared publicly - {{ post.created_on }}</span>
+                     </div>
+                     <!-- /.user-block -->
+                     <p>
+                       {{ post.description }}
+                     </p>
+
+                     <p>
+                       {% if accessFun('admin', post.owner, 'delete') %}
+                       <a href="post/delete/{{ post.slug }}" class="link-black text-sm mr-2"><i class="far fa-trash-alt mr-1"></i> Delete</a>
+                       {% endif %}
+                       {% if accessFun('admin', post.owner, 'update') %}
+                       <a href="post/edit/{{ post.slug }}" class="link-black text-sm"><i class="fas fa-pencil-alt mr-1"></i> Edit</a>
+                       {% endif %}
+                       <span class="float-right">
+                         <a href="#" class="link-black text-sm">
+                           <i class="far fa-comments mr-1"></i> Contribution (5)
+                         </a>
+                       </span>
+                     </p>
+
+
+                   </div>
+                   </div>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}

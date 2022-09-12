@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block title %} Home {% endblock %}
+
+
+{% block navbar %}
+  {{ include('/partials/navbar.html') }}
+{% endblock %}
+
+{% block aside %}
+  {{ include('/partials/aside.html') }}
+{% endblock %}
+
+{% block content_header %}
+  {{ include('/partials/content_header.html') }}
+{% endblock %}
+
+{% block container %}
+{{ include('/partials/flash.html') }}
+
+<div class="card">
+ <div class="col-md-12">
+ <div class="card-header border-transparent" style="background:#28a745;">
+   <h3 class="card-title">Users</h3>
+
+   <div class="card-tools">
+     <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+     </button>
+
+     <button type="button" class="btn btn-tool" data-card-widget="collapse">
+       <i class="fas fa-minus"></i>
+     </button>
+
+   </div>
+ </div>
+
+ <!-- /.card-header -->
+ <div class="card-body p-0">
+   <div class="table-responsive">
+     <table class="table m-0 table-bordered table-dark table-striped table-hover ">
+     <thead>
+       <tr>
+         <th>Sno.</th>
+         <th>Name</th>
+         <th>email</th>
+         <th>Edit</th>
+         <th>Delete</th>
+       </tr>
+     </thead>
+
+       <tbody>
+         {% for key, user in users %}
+        <tr>
+         <td>{{key}}</td>
+         <td>{{user.name}}</td>
+         <td>{{user.email}}</td>
+
+         <td>
+           <a class="btn btn-info btn-sm" href="user/edit/{{ user.id }}">
+           <i class="fas fa-pencil-alt"></i>Edit</a>
+         </td>
+         <td>&nbsp;<a class="btn btn-danger" href="user/delete/{{ user.id }}"><i class="fas fa-trash"></i></a>
+         </td>
+       </tr>
+       {% endfor %}
+        </tbody>
+       </table>
+
+   </div>
+   <!-- /.table-responsive -->
+ </div>
+
+ </div>
+</div>
+{% endblock %}
